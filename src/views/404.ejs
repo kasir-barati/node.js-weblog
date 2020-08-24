@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('./partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('./partials/menu.ejs') %>
+    <%- include('./partials/header.ejs') %>
+    <!-- main Section-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error-template my-5">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        ۴۰۴، صفحه مورد نظرت پیدا نشد 
+                    </h2>
+                    <div class="error-details">
+                        باس حواستو بیشتر جمع کنی. همچین صفحه ای نداریمو
+                        <br>
+                        <br>
+                        <%- include('./partials/messages') %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/galery.ejs') %>
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/javascript.ejs') %>
+</body>
+
+</html>

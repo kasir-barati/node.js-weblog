@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('./partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('./partials/menu.ejs') %>
+    <div class="container">
+        <div class="row">
+            <!-- Main Section-->
+            <div class="container my-5 py-3 text-right">
+                <!-- introduction -->
+                <div class="row">
+                    <div class="col-12">
+                        <p class="lead">
+                            Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque
+                            penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh
+                            ultricies vehicula.
+                        </p>
+                        <p>
+                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+                            ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat
+                            porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor
+                            fringilla.
+                        </p>
+                        <div class="well text-center">
+                            <img src="/img/about-us-office.jpg" alt="داخل ساختمونمون بدون برو بچ" class="img-fluid">
+                            <br>
+                            <small>نمای داخل ساختمونمون بدون برو بچ</small>
+                        </div>
+                        <br>
+                        <p>
+                            Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta
+                            gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+                            lacinia odio sem nec elit.
+                        </p>
+                        <blockquote class="text-center">
+                            <p>
+                                نقل قول
+                            </p>
+                            <footer>
+                                نقل قولی از
+                                <cite title="Source Title">
+                                    Source Title
+                                </cite>
+                            </footer>
+                        </blockquote>
+                        <p>
+                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+                            ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat
+                            porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor
+                            fringilla.
+                        </p>
+                        <p>
+                            Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta
+                            gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+                            lacinia odio sem nec elit.
+                        </p>
+                        <blockquote>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis,
+                                est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                                Donec ullamcorper nulla non metus auctor fringilla.
+                            </p>
+                        </blockquote>
+                        <div class="image-block text-center">
+                            <img src="/img/about-us-building.jpeg" class="img-fluid">
+                            <small>نمای خارج ساختمونمون</small>
+                        </div>
+                        <br>
+                        <p>
+                            Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta
+                            gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+                            lacinia odio sem nec elit.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- team members -->
+                <div class="row">
+                    <!-- Header -->
+                    <header class="col-12 bg-primary text-center py-5 mb-4">
+                        <div class="container">
+                            <h1 class="font-weight-light text-white">
+                                با برو بچ آشنا شو
+                            </h1>
+                        </div>
+                    </header>
+                    <!-- <Page-Content> -->
+                    <div class="col-12">
+                        <div class="row">
+                            <% users.forEach(user => { %>
+                            <!-- Team Member -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-0 shadow">
+                                    <img src="<%= user.avatar %>" class="card-img-top" alt="آواتار دوستمون">
+                                    <div class="card-body text-center">
+                                        <a href="/user/<%= user.id %>">
+                                            <h5 class="card-title mb-0">
+                                                <%= user.fullname %>
+                                        </a>
+                                        </h5>
+                                        <div class="card-text text-black-50">
+                                            <%= user.userRole.title %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <!-- </Page-Content> -->
+                </div>
+
+                <div class="row">
+                    <header class="col-12 bg-primary text-center py-5 mb-4">
+                        <div class="container">
+                            <h1 class="font-weight-light text-white">
+                                یه سری کارایی که کردیم
+                            </h1>
+                        </div>
+                    </header>
+                </div>
+                <!-- our activities -->
+                <div id="activities" class="carousel slide carousel-multi-item" data-ride="carousel">
+                    <!--Slides-->
+                    <div class="carousel-inner">
+                        <!--First slide-->
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">بیشتر بخون</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.First slide-->
+                        <!--Second slide-->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">بیشتر بخون</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Second slide-->
+
+                        <!--Third slide-->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">بیشتر بخون</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top" src="/img/our-activities.jpeg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                title
+                                            </h4>
+                                            <p class="card-text">
+                                                Some quick example text to build on the card title and make up the bulk
+                                                of the card's content.
+                                            </p>
+                                            <a class="btn btn-primary">
+                                                بیشتر بخون
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Third slide-->
+                    </div>
+                    <!--/.Slides-->
+                    <!--Controls-->
+                    <div class="controls-top text-center">
+                        <a class="p-2 px-3 rounded-circle btn-warning" href="#activities" data-slide="prev">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <a class="p-2 px-3 rounded-circle btn-warning" href="#activities" data-slide="next">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    </div>
+                    <!--/.Controls-->
+                </div>
+                <!--/.Carousel Wrapper-->
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/galery.ejs') %>
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/javascript.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('../../partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('../../partials/menu.ejs') %>
+    <div class="container">
+        <div class="row">
+            <!-- Posts -->
+            <main class="posts-listing col-lg-8">
+                <div class="container">
+                    <div class="row">
+                        <%- include('../../partials/messages.ejs') %>
+                    </div>
+                    <div class="row mb-3" >
+                        <div class="col-12" >
+                            <a href="/admin/posts/create" >
+                                <i class="bg-success p-3 rounded-circle text-white fa fa-plus"></i>
+                            </a>
+                            <span>ایجاد یه پست جدید</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <% posts.forEach(post => { %>
+                        <!-- post -->
+                        <div class="post col-xl-6">
+                            <div class="post-thumbnail">
+                                <a href="/admin/posts/edit/<%= post.slug %>">
+                                    <img src="<%= post.baner %>" alt="عکس مربوط به این پست" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="post-details">
+                                <div class="post-meta d-flex justify-content-between">
+                                    <div class="date meta-last">
+                                        نوشته شده: <%= post.createdAt.toLocaleDateString() %>
+                                        <br>
+                                        ویرایش شده: <%= post.updatedAt.toLocaleDateString() %>
+                                    </div>
+                                    <div class="category">
+                                        <% post.categories.forEach(category => { %>
+                                        <a href="/posts/category/<%= category.title %>">
+                                            <%= category.title %>
+                                        </a>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                                <a href="/admin/posts/edit/<%= post.slug %>">
+                                    <h2 class="h4">
+                                        <%= post.title %>
+                                    </h2>
+                                </a>
+                                <p class="text-muted">
+                                    <%= post.description %>
+                                </p>
+                                <footer class="post-footer d-flex align-items-center">
+                                    <span class="author d-flex align-items-center flex-wrap">
+                                        <div class="avatar">
+                                            <img src="<%= post.thumbnail %>" alt="<%= post.title %>" class="img-fluid">
+                                        </div>
+                                        <div class="title">
+                                            <span>
+                                                <%= post.user.fullname %>
+                                            </span>
+                                        </div>
+                                    </span>
+                                    <div class="comments">
+                                        <i class="icon-comment"></i>
+                                        <%= post.dataValues.commentsCounter %>
+                                    </div>
+                                    <div class="comments meta-last">
+                                        <a data-toggle="modal" class="text-danger" href="#deletePost" data-whatever="<%= post.slug %>">
+                                            حذف پست
+                                        </a>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <!-- Pagination -->
+                    <%- include('../../partials/pagination.ejs') %>
+                </div>
+            </main>
+            <%- include('../../partials/admin-sidebar.ejs') %>
+        </div>
+    </div>
+    <!-- modal delete post -->
+    <div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="deletePostForm" action="/admin/posts/" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProjectLabel">میخوای پستو حذف کنی؟</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-justify">
+                            اگه مطمئنی میخوای حذفش کنی ما کاری به کارت نداریم حذفش بکن. ولی یادت باشه بعد حذف شدن دیگه نمیتونی برش گردونی.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="button" class="btn btn-secondary ml-4" data-dismiss="modal">اشتب شد، دستم خورد روش</button>
+                        <button type="submit" class="btn btn-primary">آره مطمئنم حذفش کن</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end modal delete post -->
+
+    <%- include('../../partials/footer.ejs') %>
+    <%- include('../../partials/javascript.ejs') %>
+    <script>
+        const formAction = $('#deletePostForm').attr('action');
+
+        $('#deletePost').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget) // Button that triggered the modal
+            const postId = button.data('whatever') // Extract info from data-* attributes
+
+            $('#deletePostForm').attr('action', `${formAction}/${postId}?_method=DELETE`);
+        }).on('hide.bs.modal',  function () {
+            $('#deletePostForm').attr('action', formAction);
+        });
+    </script>
+</body>
+
+</html>

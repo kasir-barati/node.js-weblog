@@ -1,0 +1,33 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-template d-flex justify-content-center">
+        <% if (prevPage !== 0) { %>
+            <li class="page-item">
+                <a href="/blog/?page=<%= prevPage %>" class="page-link">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="/blog/?page=<%= prevPage %>" class="page-link">
+                    <%= prevPage %>
+                </a>
+            </li>
+        <% } %>
+        <li class="page-item">
+            <a href="/blog/?page=<%= currentPage %>" class="page-link active">
+            <%= currentPage %>
+            </a>
+        </li>
+        <% if (nextPage) { %>
+            <li class="page-item">
+                <a href="/blog/?page=<%= nextPage %>" class="page-link">
+                    <%= nextPage %>
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="/blog/?page=<%= nextPage %>" class="page-link">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+        <% } %>
+    </ul>
+</nav>

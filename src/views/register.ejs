@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('./partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('./partials/menu.ejs') %>
+    <div class="container">
+        <div class="row">
+            <!-- Main Section-->
+            <div class="container my-5 py-3 text-center w-50">
+                <%- include('./partials/messages.ejs') %>
+                <div class="kpx_login">
+                    <h3 class="kpx_authTitle mb-3">
+                        ثبت نام کن یا
+                        <a href="/login">
+                            لاگین
+                        </a>
+                    </h3>
+                    <div class="row kpx_row-sm-offset-3">
+                        <div class="col-12">
+                            <form class="kpx_loginForm" action="/register" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-user input-group-text h-100"></span>
+                                        </div>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="text" class="form-control" name="fullname" placeholder="اسم کاملت">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-envelope input-group-text h-100"></span>
+                                        </div>
+                                        <input type="email" class="form-control" name="email" placeholder="ایمیلت" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-phone input-group-text h-100"></span>
+                                        </div>
+                                        <input type="tel" class="form-control" name="phone" placeholder="شماره تلفنت" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="text-right mb-2">آواتارت</div>
+                                    <div class="input-group">
+                                        <input type="file" class="btn btn-outline-info w-100 rounded" style="cursor: pointer;" accept="image/jpeg,image/png,image/jpg" name="avatar" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-key input-group-text h-100"></span>
+                                        </div>
+                                        <input type="password" class="form-control" name="password"
+                                            placeholder="رمز عبورت" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-key input-group-text h-100"></span>
+                                        </div>
+                                        <input type="password" class="form-control" name="confirmPassword"
+                                            placeholder="تکرار رمز عبورت" required>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-outline-primary btn-block" type="submit">
+                                        <i class="fa fa-sign-in"></i>
+                                        ثبت
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/widget.ejs') %>
+        </div>
+    </div>
+    <%- include('./partials/galery.ejs') %>
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/javascript.ejs') %>
+    <script>$(function () { $('[data-toggle="tooltip"]').tooltip() });</script>
+</body>
+
+</html>

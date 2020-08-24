@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('./partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('./partials/menu.ejs') %>
+    <div class="container">
+        <div class="row">
+            <!-- Main Section-->
+            <div class="container my-5 py-3 text-center w-50">
+                <%- include('./partials/messages.ejs') %>
+                <section class="py-0">
+                    <h2 class="h1-responsive font-weight-bold text-center my-4">
+                        باهامون کار داری؟
+                    </h2>
+                    <p class="text-center w-responsive mx-auto mb-5">
+                        یا سوالی داری؟ خجالت نکش، راحت باش و بپرس. 
+                        برو بچ در سریع ترین فرصت بهت جواب میدن
+                    </p>
+                    <div class="row">
+                        <div class="col-md-9 mb-md-0 mb-5">
+                            <form id="contact-form" name="contact-form" action="/contact-us" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="fullname" name="fullname" class="form-control">
+                                            <label for="name" class="">اسمت</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="email" name="email" class="form-control">
+                                            <label for="email" class="">ایمیلت</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="md-form mb-0">
+                                            <input type="text" id="subject" name="subject" class="form-control">
+                                            <label for="subject" class="">موضوع سوالت</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="md-form">
+                                            <textarea type="text" id="message" name="message" maxlength="600" rows="6" class="form-control md-textarea"></textarea>
+                                            <label for="message">پیغومت</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center text-md-left">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="btn btn-success" >نامه رسون پیاممو برسون</button>
+                                </div>
+                            </form>
+                            <div class="status"></div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                                    <p>آدرسمون: سرزمین ارواح، پایتخت قاتلان کوچه اموات</p>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-phone mt-4 fa-2x"></i>
+                                    <p style="direction: ltr;">
+                                        +۹۸
+                                        <br>
+                                        ۹۱۰۹۶۷۹۱۹۶
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <i class="fa fa-envelope mt-4 fa-2x"></i>
+                                    <p style="direction: ltr;">
+                                        money
+                                        <br>
+                                        [.]network
+                                        <br>
+                                        [.]kh
+                                        <br>
+                                        [@]gmail
+                                        <br>
+                                        [.]com
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                </section>
+            </div>
+            <%- include('./partials/widget.ejs') %>
+        </div>
+    </div>
+
+    <%- include('./partials/galery.ejs') %>
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/javascript.ejs') %>
+</body>
+
+</html>

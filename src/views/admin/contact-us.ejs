@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= pageTitle %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <%- include('../partials/stylesheet.ejs') %>
+</head>
+
+<body class="text-right">
+    <%- include('../partials/menu.ejs') %>
+    <div class="container">
+        <div class="row">
+            <!-- Posts -->
+            <main class="posts-listing col-lg-8">
+                <div class="container">
+                    <div class="row">
+                        <%- include('../partials/messages.ejs') %>
+                    </div>
+                    <div class="row">
+                        <% tickets.forEach(ticket => { %>
+                        <!-- post -->
+                        <div class="post col-xl-6">
+                            <div class="post-details">
+                                <div class="post-meta d-flex justify-content-between">
+                                    <div class="date meta-last">
+                                        نوشته شده: <%= ticket.createdAt.toLocaleDateString() %>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <%= ticket.email %>
+                                </div>
+                                <h2 class="h4">
+                                    <%= ticket.subject %>
+                                </h2>
+                                <p class="text-muted text-justify">
+                                    <%- ticket.message %>
+                                </p>
+                                <footer class="post-footer d-flex align-items-center">
+                                    <div class="ml-4">
+                                        <%= ticket.fullname %>
+                                    </div>
+                                    <div class="comments">
+                                        <a data-toggle="modal" class="text-success" href="#replyContactUs" data-ticketId="<%= ticket.id %>" data-whatever="<%= ticket.email %>">
+                                            <i class="fa fa-reply"></i>
+                                        </a>
+                                    </div>
+                                    <div class="comments meta-last">
+                                        <a data-toggle="modal" class="text-danger" href="#deleteContactUs" data-whatever="<%= ticket.id %>">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </main>
+            <%- include('../partials/admin-sidebar.ejs') %>
+        </div>
+    </div>
+    <div class="modal fade" id="replyContactUs" style="z-index: 20000;" tabindex="-1" role="dialog" aria-labelledby="replyContactUsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="replyContactUsForm" action="/admin/contact-us" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProjectLabel">پاسخ دادن به تیکت</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <label for="subject" class="">موضوع</label>
+                                    <input type="text" id="subject" name="subject" required class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <label for="subject" class="">ایمیل خودت برا پاسخ دهی از طریق ایمیل</label>
+                                    <input type="email" id="adminEmail" name="adminEmail" required class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <label for="subject" class="">ایمیل کاربر</label>
+                                    <input type="email" required readonly id="userEmail" name="userEmail" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <label for="message">پیغومت</label>
+                                    <textarea type="text" required id="message" name="message" maxlength="600" rows="6" class="form-control md-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="button" class="btn btn-success ml-4" data-dismiss="modal">اشتب شد، دستم خورد روش</button>
+                        <button type="submit" class="btn btn-warning">آره مطمئنم حذفش کن</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteContactUs" style="z-index: 20000;" tabindex="-1" role="dialog" aria-labelledby="deleteContactUsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="deleteContactUsForm" action="/admin/contact-us" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteProjectLabel">میخوای این پیامو حذف کنی؟</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-justify">
+                            اگه مطمئنی میخوای حذفش کنی ما کاری به کارت نداریم حذفش بکن. ولی یادت باشه بعد حذف شدن دیگه نمیتونی برش گردونی.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="button" class="btn btn-success ml-4" data-dismiss="modal">اشتب شد، دستم خورد روش</button>
+                        <button type="submit" class="btn btn-warning">آره مطمئنم حذفش کن</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end modal delete post -->
+
+    <%- include('../partials/footer.ejs') %>
+    <%- include('../partials/javascript.ejs') %>
+    <script>
+        const deleteFormAction = $('#deleteContactUsForm').attr('action');
+        const replyFormAction = $('#replyContactUsForm').attr('action');
+
+        $('#replyContactUs').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const userEmail = button.data('whatever');
+            const ticketId = button.data('ticketid');
+
+            $('#deleteContactUsForm').attr('action', `${replyFormAction}/${ticketId}`);
+            $('#userEmail').attr('value', userEmail);
+        }).on('hide.bs.modal',  function () {
+            $('#userEmail').attr('value', '');
+            $('#replyContactUsForm').attr('action', replyFormAction);
+        });
+        $('#deleteContactUs').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const ticketId = button.data('whatever');
+
+            $('#deleteContactUsForm').attr('action', `${deleteFormAction}/${ticketId}?_method=DELETE`);
+        }).on('hide.bs.modal',  function () {
+            $('#deleteContactUsForm').attr('action', deleteFormAction);
+        });
+    </script>
+</body>
+
+</html>

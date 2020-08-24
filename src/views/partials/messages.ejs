@@ -1,0 +1,17 @@
+<% messages.forEach(message => { %> 
+    <div class="alert alert-info alert-dismissible fade show mb-5" role="alert">
+        <%= message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% }) %>
+<% errorMessages.forEach(error => { %> 
+    <div class="alert alert-warning alert-dismissible fade show mb-5" role="alert">
+        <strong>اخطار!</strong> 
+        <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% }) %>

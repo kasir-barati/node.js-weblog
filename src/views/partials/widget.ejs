@@ -1,0 +1,82 @@
+<aside class="col-lg-4">
+    <!-- Widget [Search Bar Widget]-->
+    <div class="widget search">
+        <header>
+            <h3 class="h6">
+                جستجو تو بلاگ
+            </h3>
+        </header>
+        <form action="/search" method="post" class="search-form">
+            <div class="form-group">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="search" name="search" placeholder="دنبال چی چی میگردی؟">
+                <button type="submit" class="submit">
+                    <i class="icon-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <!-- Widget [Important Posts Widget]        -->
+    <div class="widget latest-posts">
+        <header>
+            <h3 class="h6">پستای مهم</h3>
+        </header>
+        <div class="blog-posts">
+            <% importantPosts.forEach(post => { %>
+            <a href="/posts/<%= post.slug %>">
+                <div class="item d-flex align-items-center">
+                    <div class="image">
+                        <img src="<%= post.thumbnail %>" alt="<%= post.title %>" class="img-fluid">
+                    </div>
+                    <div class="title">
+                        <strong>
+                            <%= post.title %>
+                        </strong>
+                        <div class="d-flex align-items-center">
+                            <div class="views">
+                                <i class="icon-eye"></i>
+                                <%= post.dataValues.viewsCounter %>
+                            </div>
+                            <div class="comments">
+                                <i class="icon-comment"></i>
+                                <%= post.dataValues.commentsCounter %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <% }) %>
+        </div>
+    </div>
+    <!-- Widget [Categories Widget]-->
+    <div class="widget categories">
+        <header>
+            <h3 class="h6">دسته بندیا</h3>
+        </header>
+        <% categories.forEach(category => { %>
+        <div class="item d-flex justify-content-between">
+            <a href="/posts/category/<%= category.title %>">
+                <%= category.title %>
+            </a>
+            <span>
+                <%= category.dataValues.postNumber %>
+            </span>
+        </div>
+        <% }) %>
+    </div>
+    <!-- Widget [Tags Cloud Widget]-->
+    <div class="widget tags">
+        <header>
+            <h3 class="h6">تگا</h3>
+        </header>
+        <ul class="list-inline">
+            <% tags.forEach(tag => { %>
+                <li class="list-inline-item">
+                    <a href="/posts/tag/<%= tag.title %>" class="tag">
+                        #<%= tag.title %>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</aside> 

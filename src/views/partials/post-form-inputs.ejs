@@ -1,0 +1,167 @@
+<style>
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: none;
+        }
+    }
+
+    .modal-dialog {
+        width: 100%;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: 99%;
+    }
+
+    [contenteditable][placeholder]:empty:before {
+        content: attr(placeholder);
+        cursor: text;
+        position: absolute;
+        color: gray;
+        background-color: transparent;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        <input type="text" id="title" name="title" value="<%= post.title %>" maxlength="255"
+            class="h3 form-control border-0"
+            placeholder="یه عنوان درست و درمون که حاوی کلمات کلیدی هست انتخاب کن نه یه عنوان تبلیغاتی" required>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <textarea hidden id="markedContent" name="markedContent" style="resize: none; min-height: 500px;"
+            required><%= post.markedContent %></textarea>
+        <div placeholder="اینجی هر چی میخوای بینیویس" contenteditable id="divMarkedContent"
+            class="border-0 mb-3 p-2 px-3">
+            <%- post.markedContent %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <button type="button" data-toggle="modal" data-target="#postDetails" class="btn btn-success btn-lg">
+        <i class="fa fa-dot-circle-o"></i>
+        منتشر کردن
+        <i class="fa fa-dot-circle-o"></i>
+    </button>
+    <a href="/admin/posts" class="btn btn-danger btn-lg">
+        <i class="fa fa-ban"></i>
+        بیخیال
+        <i class="fa fa-ban"></i>
+    </a>
+</div>
+
+<script>
+    document.getElementById("divMarkedContent").onkeyup = function (event) {
+        document.getElementById("markedContent").innerHTML = this.innerHTML;
+    };
+</script>
+
+<!-- modal -->
+<div class="modal fade" id="postDetails" style="z-index: 10000;" tabindex="-1" role="dialog"
+    aria-labelledby="postDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg my-0" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <button type="button" class="close mr-3" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="description" class="mt-3 mb-5 h5 form-control-label">توضیحات پست</label>
+                                <textarea id="description" name="description" maxlength="600"
+                                    class="form-control border-0" placeholder="توضیحات مورد مورد نظرت برا پست چیه؟"
+                                    style="min-height: 100px;" required><%= post.description %></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="categories" class="mt-5 mb-1 h5 form-control-label">
+                                    دسته بندی یا دسته بندی های مورد نظرت برا پست چیه؟
+                                </label>
+                                <% if (post.categories) { %>
+                                    <input placeholder="با - دسته بندیا رو از هم جدا کن"
+                                        value="<% post.categories.forEach(category => { %><%= category.title %> - <% }) %>"
+                                        type="text" id="categories" name="categories" maxlength="255"
+                                        class="form-control border-0" required>
+                                <% } else { %>
+                                    <input placeholder="با - دسته بندیا رو از هم جدا کن" type="text" id="categories"
+                                        name="categories" maxlength="255" class="form-control border-0" required>
+                                <% } %>
+                                <% categories.forEach(category => { %>
+                                    <span class="h5 text-white badge badge-secondary">
+                                        <%= category.title %>
+                                    </span>
+                                <% }) %>
+                            </div>
+                            <div class="col-12">
+                                <label for="tags" class="mt-5 mb-1 h5 form-control-label">
+                                    تگ یا تگای مورد نظرت برا پست چیه؟
+                                </label>
+                                <% if (post.tags) { %>
+                                    <input placeholder="با - تگا رو از هم جدا کن" type="text"
+                                        value="<% post.tags.forEach(tag => { %><%= tag.title %> - <% }) %>" id="tags"
+                                        name="tags" maxlength="255" class="form-control border-0" required>
+                                <% } else { %>
+                                    <input placeholder="با - تگا رو از هم جدا کن" type="text" id="tags" name="tags"
+                                        maxlength="255" class="form-control border-0" required>
+                                <% } %>
+                                <% tags.forEach(tag => { %>
+                                    <span class="h5 text-white badge badge-secondary">
+                                        <%= tag.title %>
+                                    </span>
+                                <% }) %>
+                            </div>
+                            <div class="col-12">
+                                <input type="checkbox" id="isPublished" name="isPublished" class=""
+                                    <% if (post.isPublished) { %>checked<% } else { %><% } %>>
+                                <label for="isPublished" class="mt-5 mb-1 h5 form-control-label">
+                                    این پست درجا منتشر بشه؟
+                                </label>
+                                <span class="help-block text-muted d-block">
+                                    اگه بخوای میتونی الان پستو بنویسی ولی بعدا منتشرش بکنی
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="baner" class="mt-3 mb-2 h5 form-control-label">
+                                    بنر پستو آپلود بکن
+                                </label>
+                                <input type="file" id="baner" name="baner" accept="*.png">
+                                <% if (post.baner) { %>
+                                <img src="<%= post.baner %>" class="img-fluid mt-3" alt="بنر پست">
+                                <% } %>
+                                <span class="help-block text-muted d-block">
+                                    یه بنر تو ابعاد مناسب (دوروبره ۹۰۰ × ۱۲۰۰)
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <label for="thumbnail" class="mt-3 mb-2 h5 form-control-label">
+                                    thumbnail پستو چیه؟
+                                </label>
+                                <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
+                                <% if (post.thumbnail) { %>
+                                    <img src="<%= post.thumbnail %>" class="img-fluid mt-3" alt="thumbnail فعلی پست">
+                                <% } %>
+                                <span class="help-block text-muted d-block">
+                                    یه thumbnail تو ابعاد مناسب (دوروبره ۳۰۰ × ۳۰۰)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-lg btn-info" data-dismiss="modal">بگرد</button>
+                <button type="submit" class="btn btn-lg btn-success">انتشار</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->

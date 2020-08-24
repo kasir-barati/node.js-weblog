@@ -1,0 +1,45 @@
+<div class="row mb-4">
+    <div class="col-6">
+        <input type="email" name="email" maxlength="255" required class="form-control" value="<%= user.email %>"
+            placeholder="یه ایمیل وارد بکن">
+        <span class="help-block text-muted">
+            تکراری نباشه
+        </span>
+    </div>
+    <div class="col-6">
+        <input type="text" name="fullname" class="form-control" value="<%= user.fullname %>" placeholder="اسم کاربر" required>
+        <span class="help-block text-muted">
+            اسمتو یا لقبی که دوست داری بتایپ
+        </span>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-6">
+        <input value="<%= user.phone %>" type="tel" name="phone" class="form-control" placeholder="شماره تلفن"
+            required >
+        <span class="help-block text-muted">
+            تکراری نباشه
+        </span>
+    </div>
+    <div class="col-6">
+        <input style="cursor: pointer;" type="file" name="avatar" class="form-control btn btn-outline-info mb-2" accept="image/jpeg,image/png,image/jpg" >
+        <% if (user.avatar) { %>
+            <img src="<%= user.avatar %>" alt="آواتار کاربر" class="img-fluid">
+        <% } %>
+        <span class="help-block text-muted">
+            اگه میخوای عکس پروفایلتو عوض کنی می‌تونی الان یه عکس انتخاب بکنی
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <button type="submit" class="btn btn-success btn-lg">
+        <i class="fa fa-dot-circle-o"></i>
+        ثبت
+        <i class="fa fa-dot-circle-o"></i>
+    </button>
+    <a href="/admin/users" class="btn btn-danger btn-lg">
+        <i class="fa fa-ban"></i>
+        بیخیال
+        <i class="fa fa-ban"></i>
+    </a>
+</div>
