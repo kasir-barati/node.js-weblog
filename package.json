@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://bitbucket.org/node-js-developers-kh/money-network#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
