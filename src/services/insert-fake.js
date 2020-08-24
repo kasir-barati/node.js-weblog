@@ -4,12 +4,11 @@ const { baseUrl } = require('../config');
 const TagModel = require('../models/tag');
 const UserModel = require('../models/user');
 const PostModel = require('../models/post');
-const TocketModel = require('../models/ticket');
+const TicketModel = require('../models/ticket');
 const CommentModel = require('../models/comment');
 const CategoryModel = require('../models/category');
 const PostViewModel = require('../models/post-view');
 const UserRoleModel = require('../models/user-role');
-const TicketModel = require('../models/ticket');
 
 module.exports = async () => {
     try {
@@ -58,22 +57,12 @@ module.exports = async () => {
             accessLevel: 4
         });
 
-        // const BlogerRole = await UserRoleModel.create({
-        //     title: 'بلاگ نویس',
-        //     accessLevel: 3
-        // });
-
-        // const editorRole = await UserRoleModel.create({
-        //     title: 'ویرایشگر',
-        //     accessLevel: 2
-        // });
-
         const userRole = await UserRoleModel.create({
             title: 'کاربر',
             accessLevel: 1
         });
 
-        const adminUser = await UserModel.create({
+        const adminUser1 = await UserModel.create({
             fullname: faker.name.findName(),
             email: faker.internet.email(),
             phone: faker.phone.phoneNumber(),
@@ -83,7 +72,7 @@ module.exports = async () => {
             password: '123456zxc'
         });
 
-        const blogerUser = await UserModel.create({
+        const adminUser2 = await UserModel.create({
             fullname: faker.name.findName(),
             email: faker.internet.email(),
             phone: faker.phone.phoneNumber(),
@@ -93,7 +82,7 @@ module.exports = async () => {
             password: '123456zxc'
         });
 
-        const editorUser = await UserModel.create({
+        const adminUser3 = await UserModel.create({
             fullname: faker.name.findName(),
             email: faker.internet.email(),
             phone: faker.phone.phoneNumber(),
@@ -121,7 +110,7 @@ module.exports = async () => {
                 description: faker.lorem.lines(2),
                 thumbnail: `${baseUrl}/img/thumbnails/sample.jpg`,
                 baner: `${baseUrl}/img/baners/sample.jpeg`,
-                userId: adminUser.id,
+                userId: adminUser1.id,
                 createdAt: new Date() - 100000,
                 isPublished: true
             });
@@ -131,7 +120,8 @@ module.exports = async () => {
             category2.addPost(post1);
             await CommentModel.create({
                 markedContent: faker.lorem.paragraph(3),
-                userId: adminUser.id,
+                adminSeened: i % 2 === 0 ? true : false,
+                userId: adminUser1.id,
                 postId: post1.id
             });
             await PostViewModel.create({
@@ -149,7 +139,7 @@ module.exports = async () => {
                 description: faker.lorem.lines(2),
                 thumbnail: `${baseUrl}/img/thumbnails/sample.jpg`,
                 baner: `${baseUrl}/img/baners/sample.jpeg`,
-                userId: blogerUser.id,
+                userId: adminUser2.id,
                 createdAt: new Date() - 10000000,
                 isPublished: true
             });
@@ -159,13 +149,14 @@ module.exports = async () => {
             category3.addPost(post2);
             await CommentModel.create({
                 markedContent: faker.lorem.paragraph(3),
-                userId: blogerUser.id,
+                adminSeened: i % 2 === 0 ? true : false,
+                userId: adminUser2.id,
                 postId: post2.id
             });
             await PostViewModel.create({
                 userIp: faker.internet.ip(),
                 systemInfo: faker.internet.userAgent(),
-                userId: adminUser.id,
+                userId: adminUser1.id,
                 postId: post2.id
             });
         };
@@ -178,7 +169,7 @@ module.exports = async () => {
                 description: faker.lorem.lines(2),
                 thumbnail: `${baseUrl}/img/thumbnails/sample.jpg`,
                 baner: `${baseUrl}/img/baners/sample.jpeg`,
-                userId: blogerUser.id,
+                userId: adminUser2.id,
                 createdAt: new Date() - 1000000000,
                 isPublished: true
             });
@@ -188,7 +179,8 @@ module.exports = async () => {
             category4.addPost(post3);
             await CommentModel.create({
                 markedContent: faker.lorem.paragraph(3),
-                userId: editorUser.id,
+                adminSeened: i % 2 === 0 ? true : false,
+                userId: adminUser3.id,
                 postId: post3.id
             });
             await PostViewModel.create({
@@ -206,7 +198,7 @@ module.exports = async () => {
                 description: faker.lorem.lines(2),
                 thumbnail: `${baseUrl}/img/thumbnails/sample.jpg`,
                 baner: `${baseUrl}/img/baners/sample.jpeg`,
-                userId: blogerUser.id,
+                userId: adminUser2.id,
                 createdAt: new Date() - 100000000000,
                 isPublished: true
             });
@@ -215,6 +207,7 @@ module.exports = async () => {
             category4.addPost(post4);
             await CommentModel.create({
                 markedContent: faker.lorem.paragraph(3),
+                adminSeened: i % 2 === 0 ? true : false,
                 userId: simpleUser.id,
                 postId: post4.id
             });
@@ -226,13 +219,13 @@ module.exports = async () => {
             });
         };
 
-        TicketModel.create({
-            fullname: faker.name.firstName(),
-            email: faker.internet.email(),
-            subject: faker.lorem.words(6),
-            message: faker.lorem.sentences(6),
-        });
-    } catch (error) {
-        console.error(error);
-    };
+        for (let i = 0; i < 4; i++) {
+            await TicketModel.create({
+                fullname: faker.name.firstName(),
+                email: faker.internet.email(),
+                subject: faker.lorem.words(6),
+                message: faker.lorem.sentences(6),
+            });
+        };
+    } catch (error) { console.error(error) };
 };
