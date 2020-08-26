@@ -13,12 +13,13 @@ class AdminUserController {
             const errorMessages = req.flash('errorMessages');
             const { users } = await IndexService.readUsers();
             const { categories } = await IndexService.readCategories(id);
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
-            // fetch latest relative comments
             
             res.render('admin/user/index', {
                 tags,
                 users,
+                comments,
                 messages,
                 categories,
                 errorMessages,
@@ -31,7 +32,6 @@ class AdminUserController {
 
     static async getCreateUser(req, res, next) {
         try {
-            // const user = req.flash('user')[0] ? req.flash('user')[0] : { email: '', fullname: '', phone: '' };
             const user = { email: '', fullname: '', phone: '' };
             const messages = req.flash('messages');
             const errorMessages = req.flash('errorMessages');
