@@ -1,5 +1,6 @@
 const IndexService = require('../../services/index');
 const AdminPostService = require('../../services/admin-post');
+const AdminCommentService = require('../../services/admin-comment');
 const PostService = require('../../services/post');
 const { postPerPage } = require('../../config');
 
@@ -12,14 +13,15 @@ class AdminPostController {
             const { tags } = await IndexService.readTags(id);
             const errorMessages = req.flash('errorMessages');
             const { categories } = await IndexService.readCategories(id);
+            const { comments } = await AdminCommentService.readUserComments(5, 1, id);
             const { posts, postsNumber } = await AdminPostService.readUserPosts(postPerPage, page, id);
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
             const pagesNumber = Math.ceil(postsNumber / postPerPage);
-            // fetch comments: answers to your comment, comments below your post
 
             res.render('admin/post/index', {
                 tags,
                 posts,
+                comments,
                 messages,
                 categories,
                 errorMessages,
@@ -79,6 +81,7 @@ class AdminPostController {
             const { tags } = await IndexService.readTags(id);
             const errorMessages = req.flash('errorMessages');
             const { categories } = await IndexService.readCategories(id);
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             const { posts, postsNumber } = await AdminPostService.readCategoryUserPosts(postPerPage, page, title, id);
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
             const pagesNumber = Math.ceil(postsNumber / postPerPage);
@@ -86,6 +89,7 @@ class AdminPostController {
             res.render('admin/post/index', {
                 tags,
                 posts,
+                comments,
                 messages,
                 categories,
                 errorMessages,
@@ -109,6 +113,7 @@ class AdminPostController {
             const { tags } = await IndexService.readTags(id);
             const errorMessages = req.flash('errorMessages');
             const { categories } = await IndexService.readCategories(id);
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             const { posts, postsNumber } = await AdminPostService.readTagUserPosts(postPerPage, page, title, id);
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
             const pagesNumber = Math.ceil(postsNumber / postPerPage);
@@ -116,6 +121,7 @@ class AdminPostController {
             res.render('admin/post/index', {
                 tags,
                 posts,
+                comments,
                 messages,
                 categories,
                 errorMessages,
