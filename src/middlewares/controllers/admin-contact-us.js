@@ -12,11 +12,12 @@ class AdminCategoryController {
             const { categories: allCategories } = await IndexService.readCategories();
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
             const { tickets } = await AdminContactUsService.readContactUs();
-            // fetch latest relative comments
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             
             res.render('admin/contact-us', {
                 tags,
                 tickets,
+                comments,
                 messages,
                 categories,
                 allCategories,
