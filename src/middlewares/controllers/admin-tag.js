@@ -10,13 +10,14 @@ class AdminTagController {
             const errorMessages = req.flash('errorMessages');
             const { tags: allTags } = await IndexService.readTags();
             const { categories } = await IndexService.readCategories(id);
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
-            // fetch latest relative comments
             
             res.render('admin/tag/index', {
                 tags,
                 allTags,
                 messages,
+                comments,
                 categories,
                 errorMessages,
                 importantPosts,
