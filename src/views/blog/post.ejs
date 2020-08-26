@@ -138,7 +138,7 @@
                                             <button class="btn btn-link text-secondary" onclick="reply(this)" data-whatever="<%= comment.id %>" data-markedContent="<blockquote><%= comment.markedContent %></blockquote>" >
                                                 <i class="fa fa-reply" aria-hidden="true"></i>
                                             </button>
-                                            <% if (userId === comment.userId) { %>
+                                            <% if (userId === comment.userId || isAdmin) { %>
                                                 <button class="btn btn-link text-danger" data-target="#deleteComment" data-toggle="modal" data-whatever="<%= comment.id %>">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
