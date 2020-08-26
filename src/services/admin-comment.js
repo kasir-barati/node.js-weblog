@@ -1,8 +1,12 @@
-const CommentModel = require('../models/comment');
 const createDomPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 const marked = require('marked');
+
 const dompurify = createDomPurify(new JSDOM().window);
+
+const CommentModel = require('../models/comment');
+const UserModel = require('../models/user');
+const PostModel = require('../models/post');
 
 class AdminCategoryService {
     /**
@@ -44,6 +48,47 @@ class AdminCategoryService {
             comment.markedContent = markedContent;
             comment.sanitizedContent = dompurify.sanitize(marked(markedContent));
             return await comment.save();
+        } catch (error) { throw error };
+    };
+
+    /**
+     * read comment
+     * @param {UUID} id comment id
+     * @return {Object} comment
+     */
+    static async readComment(id) {
+        try {
+            const comment = await CommentModel.findByPk(id, {
+                include: [
+                    { model: PostModel },
+                    { model: UserModel, attributes: ['email', 'id'] }
+                ]
+            });
+
+            return { comment };
+        } catch (error) { throw error };
+    };
+
+    /**
+     * 
+     * @param {number} limit comment limitaion
+     * @param {number} page page number
+     * @param {UUID} userId user id
+     */
+    static async readUserComments(limit, page, userId) {
+        try {
+            const comments = await CommentModel.findAll({
+                where: { adminSeened: false },
+                limit,
+                offset: (page - 1) * limit,
+                order: [['createdAt', 'DESC']],
+                include: [
+                    { model: UserModel, where: { id: userId } },
+                    { model: PostModel }
+                ]
+            });
+
+            return { comments };
         } catch (error) { throw error };
     };
 };
