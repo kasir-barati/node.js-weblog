@@ -1,4 +1,5 @@
 const IndexService = require('../../services/index');
+const AdminCommentService = require('../../services/admin-comment');
 const AdminCategoryService = require('../../services/admin-category');
 
 class AdminCategoryController {
@@ -11,10 +12,11 @@ class AdminCategoryController {
             const { categories } = await IndexService.readCategories(id);
             const { categories: allCategories } = await IndexService.readCategories();
             const { posts: importantPosts } = await IndexService.readCategoryPosts(3, 1, 'important');
-            // fetch latest relative comments
+            const { comments } = await AdminCommentService.readUserComments(5, id);
             
             res.render('admin/category/index', {
                 tags,
+                comments,
                 messages,
                 categories,
                 allCategories,
