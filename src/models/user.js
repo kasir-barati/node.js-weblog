@@ -24,13 +24,7 @@ UserModel.init({
         }
     },
     phone: DataTypes.STRING,
-    avatar: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        // validate: {
-        //     isUrl: true
-        // }
-    },
+    avatar: DataTypes.STRING,
     password: DataTypes.STRING,
     emailVerified: {
         type: DataTypes.BOOLEAN,
