@@ -1,17 +1,29 @@
 <aside class="col-lg-4">
-    <!-- Widget [Comments Bar Widget]-->
     <div class="widget search">
         <header>
             <h3 class="h6">
                 <% if (isAdmin) { %>
-                    آخرین کامنتا روی پستات
+                    <a href="/admin/comments">
+                        آخرین کامنتا روی پستات
+                    </a>
                 <% } else { %>
                     جواب کامنتات
                 <% } %>
             </h3>
         </header>
-        <!-- comments -->
-        <!-- answers to your comment, comments below your post -->
+        <% comments.forEach(comment => { %>
+            <div class="item d-flex justify-content-between mb-4">
+                <a href="/posts/<%= comment.post.slug %>?commentId=<%= comment.id %>">
+                    <%= comment.post.title %>
+                </a>
+                <a style="word-break: break-all;" href="/admin/users/<%= comment.id %>">
+                    <%= comment.user.email %>
+                </a>
+                <span>
+                    <%= comment.createdAt.toLocaleDateString() %>
+                </span>
+            </div>
+        <% }) %>
     </div>
     <!-- Widget [Profile Widget]        -->
     <div class="widget latest-posts">
