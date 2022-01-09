@@ -1,57 +1,104 @@
-# node.js-weblog
-node.js weblog created with EJS, Expressjs, Sequelize (Postgres) and Bootstrap. We use MVC pattern in this project. In this weblog you can use OAuth (google and github) for login.
+# Node.JS-weblog
+
+[![Sponsor][sponsor-badge]][sponsor]
+[![TypeScript version][ts-badge]][typescript-4-5]
+[![Node.js version][nodejs-badge]][nodejs]
+[![APLv2][license-badge]][license]
+[![Build Status - GitHub Actions][gha-badge]][gha-ci]
+
+👩🏻‍💻 Developer Ready: A comprehensive template. Works out of the box for most [Node.js][nodejs] projects.
+
+🏃🏽 Instant Value: All basic tools included and configured:
+
+- [TypeScript][typescript] [4.5][typescript-4-5]
+- [ESLint][eslint] with some initial rules recommendation
+- [Jest][jest] for fast unit testing and code coverage
+- Type definitions for Node.js and Jest
+- [Prettier][prettier] to enforce consistent code style
+- NPM [scripts](#available-scripts) for common operations
+- Simple example of TypeScript code and unit test
+- .editorconfig for consistent file format
+- Reproducible environments thanks to [Volta][volta]
+- Example configuration for [GitHub Actions][gh-actions]
+
+🤲 Free as in speech: available under the APLv2 license.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project is intended to be used with the latest Active LTS release of [Node.js][nodejs].
 
-### Prerequisites
-* first of all you should change values in the .env file
-* you need to create `NodejsDevelopersKh` database in the postgres or create whatever yoou want
+### Use as a repository template
 
+To start, just click the **[Use template][repo-template-action]** link (or the green button). Start adding your code in the `src` and unit tests in the `__tests__` directories.
 
-### Installing
-* `npm install`
-* `npm run dev-start` (nodemon) or `npm run start` (node)
+### Clone repository
 
-### Versions
-* Debian 10.0.0
-* Postgres 12
-* Node.js 12.18.3
-* NPM 6.14.6
+To clone the repository, use the following commands:
 
-## Running the tests
+```sh
+git clone https://github.com/jsynowiec/node-typescript-boilerplate
+cd node-typescript-boilerplate
+npm install
+```
 
-Unfortunatly for now we don't provide a unit test. stay tuned, we add it as fast as we can
+### Download latest release
 
-### Break down into end to end tests
+Download and unzip the current **main** branch or one of the tags:
 
-Comming soon.
+```sh
+wget https://github.com/jsynowiec/node-typescript-boilerplate/archive/main.zip -O node-typescript-boilerplate.zip
+unzip node-typescript-boilerplate.zip && rm node-typescript-boilerplate.zip
+```
 
-## Deployment
+## Available Scripts
 
-Add additional notes about how to deploy this on a live system
+- `clean` - remove coverage data, Jest cache and transpiled files,
+- `prebuild` - lint source files and tests before building,
+- `build` - transpile TypeScript to ES6,
+- `build:watch` - interactive watch mode to automatically transpile source files,
+- `lint` - lint source files and tests,
+- `test` - run tests,
+- `test:watch` - interactive watch mode to automatically re-run tests
 
-## Built With
+## Additional Informations
 
-* [Postgres](https://www.postgresql.org/docs/12/index.html) - The Database used
-* [Node.js](https://nodejs.org/dist/latest-v12.x/docs/api/) - The runtime environment used
+### Why include Volta
 
-## Contributing
+[Volta][volta]’s toolchain always keeps track of where you are, it makes sure the tools you use always respect the settings of the project you’re working on. This means you don’t have to worry about changing the state of your installed software when switching between projects. For example, it's [used by engineers at LinkedIn][volta-tomdale] to standardize tools and have reproducible development environments.
 
-Please read [CONTRIBUTING.md](https://gist.github.com/#) for details on our code of conduct, and the process for submitting pull requests to us.
+I recommend to [install][volta-getting-started] Volta and use it to manage your project's toolchain.
 
-## Authors
+### Writing tests in JavaScript
 
-* **Mohammad jawad barati** - *Initial work* - [mjb-khorasani](https://github.com/MJB-Khorasani)
-* **mjb-khorasani resume** - [mjb-khorasani](https://mjb-khorasani.github.io)
+Writing unit tests in TypeScript can sometimes be troublesome and confusing. Especially when mocking dependencies and using spies.
 
-See also the list of [contributors](https://github.com/MJB-Khorasani/node.js-weblog/contributors) who participated in this project.
+This is **optional**, but if you want to learn how to write JavaScript tests for TypeScript modules, read the [corresponding wiki page][wiki-js-tests].
+
+## Backers & Sponsors
+
+Support this project by becoming a [sponsor][sponsor].
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Licensed under the APLv2. See the [LICENSE](https://github.com/jsynowiec/node-typescript-boilerplate/blob/main/LICENSE) file for details.
 
-## Acknowledgments
-
-* Myself
+[ts-badge]: https://img.shields.io/badge/TypeScript-4.5-blue.svg
+[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2016.13-blue.svg
+[nodejs]: https://nodejs.org/dist/latest-v14.x/docs/api/
+[gha-badge]: https://github.com/jsynowiec/node-typescript-boilerplate/actions/workflows/nodejs.yml/badge.svg
+[gha-ci]: https://github.com/jsynowiec/node-typescript-boilerplate/actions/workflows/nodejs.yml
+[typescript]: https://www.typescriptlang.org/
+[typescript-4-5]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-5.html
+[license-badge]: https://img.shields.io/badge/license-APLv2-blue.svg
+[license]: https://github.com/jsynowiec/node-typescript-boilerplate/blob/main/LICENSE
+[sponsor-badge]: https://img.shields.io/badge/♥-Sponsor-fc0fb5.svg
+[sponsor]: https://github.com/sponsors/jsynowiec
+[jest]: https://facebook.github.io/jest/
+[eslint]: https://github.com/eslint/eslint
+[wiki-js-tests]: https://github.com/jsynowiec/node-typescript-boilerplate/wiki/Unit-tests-in-plain-JavaScript
+[prettier]: https://prettier.io
+[volta]: https://volta.sh
+[volta-getting-started]: https://docs.volta.sh/guide/getting-started
+[volta-tomdale]: https://twitter.com/tomdale/status/1162017336699838467?s=20
+[gh-actions]: https://github.com/features/actions
+[repo-template-action]: https://github.com/jsynowiec/node-typescript-boilerplate/generate
