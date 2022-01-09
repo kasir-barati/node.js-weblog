@@ -6,7 +6,7 @@
     "license": "GPL-3.0",
     "scripts": {
         "prebuild": "rimraf dist",
-        "build": "nest build",
+        "build": "nest build --path tsconfig.release.json",
         "format": "prettier --write '**/*.ts' '**/*.js' '**/*.json'",
         "start": "nest start",
         "start:dev": "nest start --watch",
