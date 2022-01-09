@@ -4,15 +4,25 @@ module.exports = {
         project: 'tsconfig.json',
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint/eslint-plugin'],
+    plugins: [
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint',
+        'jest',
+    ],
     extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:jest/recommended',
+        'prettier',
     ],
     root: true,
     env: {
         node: true,
         jest: true,
+        browser: false,
+        es6: true,
     },
     ignorePatterns: ['.eslintrc.js'],
     rules: {
