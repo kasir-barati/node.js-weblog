@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { WinstonModule } from 'nest-winston';
+import winston from 'winston';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,6 +15,16 @@ import { winstonConfigsGenerator } from './configs/winston.config';
             isGlobal: true,
             envFilePath: ['.env'],
             load: [webAppConfigsGenerator, winstonConfigsGenerator],
+        }),
+        WinstonModule.forRootAsync({
+            useFactory: async (
+                configService: ConfigService,
+            ): Promise<winston.LoggerOptions> => ({
+                ...configService.get<winston.LoggerOptions>(
+                    'loggerOptions',
+                ),
+            }),
+            inject: [ConfigService],
         }),
     ],
     controllers: [AppController],
