@@ -14,7 +14,7 @@ const allowedOrigins = [
     'null',
 ];
 
-export function corsConfigsGenerator(): { corsConfigs } | never {
+export function corsConfigsGenerator(): { corsConfigs: CorsOptions } {
     const corsConfigs: CorsOptions = {
         origin: function (origin, callback) {
             // allow requests with no origin
@@ -29,5 +29,6 @@ export function corsConfigsGenerator(): { corsConfigs } | never {
             return callback(null, true);
         },
     };
+
     return { corsConfigs };
 }

@@ -8,6 +8,9 @@ import { AppService } from './app.service';
 import { PrismaService } from './prisma/prisma.service';
 import { webAppConfigsGenerator } from './configs/web-app.config';
 import { winstonConfigsGenerator } from './configs/winston.config';
+import { PostsModule } from './posts/posts.module';
+import { UsersModule } from './users/users.module';
+import { validate } from './commons/validators/env.validator';
 
 @Module({
     imports: [
@@ -15,6 +18,8 @@ import { winstonConfigsGenerator } from './configs/winston.config';
             isGlobal: true,
             envFilePath: ['.env'],
             load: [webAppConfigsGenerator, winstonConfigsGenerator],
+            cache: true,
+            validate,
         }),
         WinstonModule.forRootAsync({
             useFactory: async (
@@ -26,6 +31,8 @@ import { winstonConfigsGenerator } from './configs/winston.config';
             }),
             inject: [ConfigService],
         }),
+        PostsModule,
+        UsersModule,
     ],
     controllers: [AppController],
     providers: [AppService, PrismaService],

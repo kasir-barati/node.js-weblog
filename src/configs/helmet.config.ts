@@ -1,6 +1,8 @@
 import { HelmetOptions } from 'helmet';
 
-export function helmetConfigsGenerator(): { helmetConfigs } | never {
+export function helmetConfigsGenerator(): {
+    helmetConfigs: HelmetOptions;
+} {
     const helmetConfigs: HelmetOptions = {
         contentSecurityPolicy: true,
         crossOriginEmbedderPolicy: true,
@@ -18,5 +20,6 @@ export function helmetConfigsGenerator(): { helmetConfigs } | never {
         referrerPolicy: true,
         xssFilter: true,
     };
+
     return { helmetConfigs };
 }
